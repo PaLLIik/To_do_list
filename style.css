@@ -1,0 +1,522 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+input {
+  outline: none;
+  border: none;
+}
+
+body {
+  font-family: 'Kanit', sans-serif;
+  font-size: 16px;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+}
+
+body.dark {
+  background-color: #252525;
+  color: #fff;
+}
+
+input,
+button,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.container {
+  position: relative;
+  width: 750px;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding-top: 40px;
+}
+
+.title {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 26px;
+  font-weight: 500;
+  color: #000;
+}
+
+.nav-container {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 18px;
+}
+
+.input {
+  width: 100%;
+  height: 38px;
+  color: #6c63ff;
+  border: solid 1px #6c63ff;
+  border-radius: 5px;
+  padding: 11px 16px 11px 36px;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+body.dark .input {
+  color: #fff;
+  border: solid 1px #fff;
+  background-color: #252525;
+}
+
+.search-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.input::placeholder {
+  color: #c3c1e5;
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.search-wrapper::before {
+  content: '';
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  background: url('img/magnifier.svg') no-repeat center;
+  background-size: contain;
+}
+
+.input:focus {
+  box-shadow: 0 0 10px rgba(108, 99, 255, 0.5);
+}
+
+body.dark .input:focus {
+  box-shadow: 0 0 10px rgb(252, 252, 253, 0.4);
+}
+
+.select {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  min-width: 85px;
+  background: #6c63ff;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  height: 38px;
+  min-width: 100px;
+  transition: all 0.3s ease;
+}
+
+.select:focus {
+  background-color: #534cc2;
+}
+
+.selected {
+  padding-left: 10px;
+  font-size: 18px;
+  font-weight: 500;
+  width: 172px;
+  text-transform: uppercase;
+}
+
+.select-trigger {
+  padding: 10px;
+}
+
+.select-trigger img {
+  width: 10px;
+  height: 10px;
+}
+
+.select__dropdown {
+  display: none;
+  position: absolute;
+  top: 101%;
+  left: 0;
+  width: 100%;
+  background: white;
+  border: solid 2px #6c63ff;
+  border-radius: 6px;
+  color: #6c63ff;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+.select.open {
+  z-index: 50;
+}
+
+.select.open .select__dropdown {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+  z-index: 1;
+}
+
+.select__item {
+  padding: 5px;
+  cursor: pointer;
+  font-weight: 300;
+}
+
+.select__item:hover {
+  background: rgba(108, 99, 255, 0.2);
+}
+
+.theme {
+  width: 38px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #6c63ff;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.theme:hover {
+  background-color: #534cc2;
+}
+
+.theme img {
+  width: 22px;
+  height: 22px;
+  margin: 8px;
+}
+
+.list {
+  width: 520px;
+  margin: 30px auto 0px;
+}
+
+.list-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.task {
+  display: flex;
+  justify-content: space-between;
+  padding: 17px 0;
+  border-bottom: 1px solid #6c63ff;
+}
+
+.label {
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.task-text,
+.edit-input {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.task-text:hover {
+  cursor: pointer;
+}
+
+.label .input-check {
+  display: none;
+}
+
+.checkmark {
+  width: 26px;
+  height: 26px;
+  border: 1px solid #6c63ff;
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+}
+
+input:checked + .checkmark {
+  background: #6c63ff;
+}
+
+.checkmark::before {
+  content: '';
+  position: absolute;
+  left: 55%;
+  top: 40%;
+  transform: translate(-50%, -50%);
+  width: 15px;
+  height: 15px;
+  background: url('img/Rectangle.svg') no-repeat center;
+  background-size: contain;
+  opacity: 0;
+}
+
+input:checked + .checkmark::before {
+  opacity: 1;
+}
+
+input:checked ~ .task-text {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+.task_action {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+}
+
+svg.task_action {
+  width: 20px;
+  height: 20px;
+  color: #cdcdcd;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.task_action.redaction:hover {
+  color: #534cc2;
+}
+
+.task_action.delete:hover {
+  color: #e50000;
+}
+
+.task_action.redaction_approval {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  position: absolute;
+  inset: 0;
+  background: white;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.task_action.redaction_approval.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.img-action {
+  display: block;
+  width: 22px;
+  cursor: pointer;
+}
+
+.img-action.approve {
+  height: 18px;
+}
+
+.add-task {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 10px;
+  bottom: 32px;
+  z-index: 1;
+  background-color: #6c63ff;
+  border: 2px solid #6c63ff;
+  box-shadow: 0 0 4px 0 #6c63ff;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.add-task:hover {
+  background-color: #534cc2;
+}
+
+.modal-container {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background-color: rgba(37, 37, 37, 0.7);
+  -webkit-backdrop-filter: blur(1px);
+  backdrop-filter: blur(1px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+.modal-container.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-form {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%) translateY(-120vh);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 18px 30px;
+  width: 500px;
+  border-radius: 15px;
+  background-color: #fff;
+}
+
+.modal-container.open .modal-form {
+  transform: translate(-50%, -50%) translateY(0);
+}
+
+.modal-title {
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 25px;
+}
+
+.modal-btns {
+  display: flex;
+  justify-content: space-between;
+  align-self: stretch;
+}
+
+.modal-btn {
+  display: block;
+  margin-top: 128px;
+  padding: 10px 22px;
+  border-radius: 5px;
+  border: 1px solid #6c63ff;
+  color: #6c63ff;
+  background-color: #fff;
+  font-weight: 500;
+  cursor: pointer;
+  transition:  background-color 0.3s,
+               color 0.3s;
+}
+
+.modal-btn.apply {
+  color: #fff;
+  background-color: #6c63ff;
+}
+
+.modal-btn.apply:hover {
+  background-color: #534cc2;
+}
+
+.modal-btn.cancel:hover {
+  background-color: #6c63ff;
+  color: #fff;
+}
+
+.undo-btn {
+  position: absolute;
+  left: 10px;
+  bottom: 32px;
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.35s ease;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 7px;
+  background: #534cc2;
+  border: 2px solid #6c63ff;
+  border-radius: 5px;
+  color: white;
+  font-size: 16px;
+  font-weight: 300;
+  cursor: pointer;
+}
+
+.undo-btn:hover {
+  background-color: #6c63ff;
+  box-shadow: 0 0 4px #6c63ff;
+}
+
+.undo-btn.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.timer {
+  position: relative;
+  margin-right: 9px;
+}
+
+.timer-svg {
+  display: block;
+}
+
+.bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.2);
+  stroke-width: 2;
+}
+
+.progress {
+  fill: none;
+  stroke: white;
+  stroke-width: 2;
+  stroke-linecap: round;
+
+  transform: rotate(-90deg);
+  transform-origin: center;
+
+  stroke-dasharray: 88;
+  stroke-dashoffset: 0;
+}
+
+.undo-count {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+body.dark .title {
+  color: #fff;
+}
+body.dark .task {
+  border-bottom-color: #6c63ff;
+}
+body.dark .task_action.redaction_approval {
+  background: #252525;
+}
+body.dark .modal-form {
+  background-color:#252525;
+  color: #fff;
+  border: 1px solid #fff;
+}
+
+body.dark .modal-btn.cancel {
+  background-color: #252525;
+}
+
+body.dark .edit-input {
+  background-color: #252525;
+  color: #fff;
+}
+
+body.dark .modal-btn.cancel:hover {
+  background-color: #6c63ff;
+  color: #fff;
+}
