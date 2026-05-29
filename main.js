@@ -5,7 +5,46 @@ select.addEventListener('click', () => {
   select.classList.toggle('open')
 })
 
+const modal = document.querySelector('.modal-container')
+const modalForm = document.querySelector('.modal-form')
+const addTaskBtn = document.querySelector('.add-task')
+const modalCancelBtn = document.querySelector('.modal-btn.cancel')
+const add = document.querySelector('.modal-btn.apply')
 
+addTaskBtn.addEventListener('click', () => {
+  modal.classList.add('open')
+  setTimeout(() => {
+    input.focus()
+  }, 0)
+})
+
+modalCancelBtn.addEventListener('click', () => {
+  modal.classList.remove('open')
+  input.value = ''
+})
+
+modal.addEventListener('click', () => {
+  modal.classList.remove('open')
+  input.value = ''
+})
+
+add.addEventListener('click', () => {
+  modal.classList.remove('open')
+  if (!input.value.trim()) return
+  const task = {
+    id: Date.now(),
+    text: input.value.trim(),
+    completed: false,
+    isEditing: false,
+  }
+  tasks.push(task)
+  render(tasks)
+  input.value = ''
+})
+
+modalForm.addEventListener('click', e => {
+  e.stopPropagation()
+})
 
 const list = document.querySelector('.list')
 const input = document.querySelector('.input-add')
