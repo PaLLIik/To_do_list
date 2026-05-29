@@ -1,3 +1,19 @@
+const select = document.querySelector('.select')
+const selectDropdown = document.querySelector('.select__dropdown')
+const selected = document.querySelector('.selected')
+
+selectDropdown.addEventListener('click', e => {
+  const item = e.target.closest('.select__item')
+  selected.textContent = item.textContent
+  const filteredTask = getFilteredTasks(item.textContent)
+  showTasks(filteredTask)
+})
+
+select.addEventListener('click', () => {
+  select.classList.toggle('open')
+})
+
+
 const list = document.querySelector('.list')
 const input = document.querySelector('.input-add')
 let tasks = []
