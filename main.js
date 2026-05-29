@@ -1,12 +1,3 @@
-const select = document.querySelector('.select')
-const trigger = document.querySelector('.select-trigger')
-
-select.addEventListener('click', () => {
-  select.classList.toggle('open')
-})
-
-
-
 const list = document.querySelector('.list')
 const input = document.querySelector('.input-add')
 let tasks = []
@@ -172,9 +163,6 @@ undoBtn.addEventListener('click', () => {
   render(tasks)
 })
 
-const selectDropdown = document.querySelector('.select__dropdown')
-const selected = document.querySelector('.selected')
-
 function getFilteredTasks(currentFilter) {
   if (currentFilter === 'Complete') {
     return tasks.filter(t => t.completed)
@@ -184,13 +172,6 @@ function getFilteredTasks(currentFilter) {
   }
   return tasks
 }
-
-selectDropdown.addEventListener('click', e => {
-  const item = e.target.closest('.select__item')
-  selected.textContent = item.textContent
-  const filteredTask = getFilteredTasks(item.textContent)
-  showTasks(filteredTask)
-})
 
 const searchInput = document.querySelector('.input.search')
 let searchValue = ''
