@@ -5,31 +5,7 @@ select.addEventListener('click', () => {
   select.classList.toggle('open')
 })
 
-const modal = document.querySelector('.modal-container')
-const modalForm = document.querySelector('.modal-form')
-const addTaskBtn = document.querySelector('.add-task')
-const modalCancelBtn = document.querySelector('.modal-btn.cancel')
 
-addTaskBtn.addEventListener('click', () => {
-  modal.classList.add('open')
-  setTimeout(() => {
-    input.focus()
-  }, 0)
-})
-
-modalCancelBtn.addEventListener('click', () => {
-  modal.classList.remove('open')
-  input.value = ''
-})
-
-modal.addEventListener('click', () => {
-  modal.classList.remove('open')
-  input.value = ''
-})
-
-modalForm.addEventListener('click', e => {
-  e.stopPropagation()
-})
 
 const list = document.querySelector('.list')
 const input = document.querySelector('.input-add')
@@ -89,21 +65,6 @@ function render(arrTasks) {
     list.prepend(li)
   })
 }
-
-const add = document.querySelector('.modal-btn.apply')
-add.addEventListener('click', () => {
-  modal.classList.remove('open')
-  if (!input.value.trim()) return
-  const task = {
-    id: Date.now(),
-    text: input.value.trim(),
-    completed: false,
-    isEditing: false,
-  }
-  tasks.push(task)
-  render(tasks)
-  input.value = ''
-})
 
 const undoBtn = document.querySelector('.undo-btn')
 const progress = document.querySelector('.progress')
@@ -216,13 +177,13 @@ const selected = document.querySelector('.selected')
 
 function getFilteredTasks(currentFilter) {
   if (currentFilter === 'Complete') {
-  return tasks.filter(t => t.completed)
+    return tasks.filter(t => t.completed)
   }
   if (currentFilter === 'Incomplete') {
-  return tasks.filter(t => !t.completed)
+    return tasks.filter(t => !t.completed)
   }
   return tasks
-  }
+}
 
 selectDropdown.addEventListener('click', e => {
   const item = e.target.closest('.select__item')
@@ -239,12 +200,10 @@ searchInput.addEventListener('input', e => {
 })
 
 function toSearchTask() {
-const searchedTasks = tasks.filter(task => {
-  return task.text
-  .toLowerCase()
-  .includes(searchValue.toLowerCase()) 
-})
-showTasks(searchedTasks)
+  const searchedTasks = tasks.filter(task => {
+    return task.text.toLowerCase().includes(searchValue.toLowerCase())
+  })
+  showTasks(searchedTasks)
 }
 
 function showTasks(listTasks) {
@@ -267,6 +226,6 @@ const themeIcon = theme.querySelector('img')
 theme.addEventListener('click', () => {
   document.body.classList.toggle('dark')
   const isDark = document.body.classList.contains('dark')
-  themeIcon.src = isDark ? 'img/moon.svg' : 'img/sun.svg' 
-  themeIcon.alt = isDark ?  'moon' : 'sun'
+  themeIcon.src = isDark ? 'img/moon.svg' : 'img/sun.svg'
+  themeIcon.alt = isDark ? 'moon' : 'sun'
 })
