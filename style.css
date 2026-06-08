@@ -333,7 +333,6 @@ svg.task_action {
   position: absolute;
   right: 10px;
   bottom: 32px;
-  z-index: 1;
   background-color: #6c63ff;
   border: 2px solid #6c63ff;
   box-shadow: 0 0 4px 0 #6c63ff;
