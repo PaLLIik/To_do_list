@@ -9,6 +9,7 @@
     <link
       href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,300;0,500;0,600;0,700&display=swap"
       rel="stylesheet" />
+    <link rel="stylesheet" href="ProgressBoard.css" />
     <title>My_To-Do_List</title>
   </head>
   <body>
@@ -34,45 +35,67 @@
         </div>
       </div>
 
-      <ul class="list">
-      </ul>
+      <ul class="list"></ul>
       <button class="add-task">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path fill-rule="evenodd" clip-rule="evenodd" d="M10.5 22.4821C10.5 22.8796 10.658 23.2608 10.9393 23.5419C11.2206 23.823 11.6022 23.9809 12 23.9809C12.3978 23.9809 12.7794 23.823 13.0607 23.5419C13.342 23.2608 13.5 22.8796 13.5 22.4821V13.4892H22.5C22.8978 13.4892 23.2794 13.3313 23.5607 13.0503C23.842 12.7692 24 12.3879 24 11.9904C24 11.5929 23.842 11.2117 23.5607 10.9306C23.2794 10.6495 22.8978 10.4916 22.5 10.4916H13.5V1.4988C13.5 1.1013 13.342 0.72007 13.0607 0.43899C12.7794 0.157909 12.3978 0 12 0C11.6022 0 11.2206 0.157909 10.9393 0.43899C10.658 0.72007 10.5 1.1013 10.5 1.4988V10.4916H1.5C1.10218 10.4916 0.720644 10.6495 0.43934 10.9306C0.158035 11.2117 0 11.5929 0 11.9904C0 12.3879 0.158035 12.7692 0.43934 13.0503C0.720644 13.3313 1.10218 13.4892 1.5 13.4892H10.5V22.4821Z" fill="#F7F7F7"/>
-          </svg>
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M10.5 22.4821C10.5 22.8796 10.658 23.2608 10.9393 23.5419C11.2206 23.823 11.6022 23.9809 12 23.9809C12.3978 23.9809 12.7794 23.823 13.0607 23.5419C13.342 23.2608 13.5 22.8796 13.5 22.4821V13.4892H22.5C22.8978 13.4892 23.2794 13.3313 23.5607 13.0503C23.842 12.7692 24 12.3879 24 11.9904C24 11.5929 23.842 11.2117 23.5607 10.9306C23.2794 10.6495 22.8978 10.4916 22.5 10.4916H13.5V1.4988C13.5 1.1013 13.342 0.72007 13.0607 0.43899C12.7794 0.157909 12.3978 0 12 0C11.6022 0 11.2206 0.157909 10.9393 0.43899C10.658 0.72007 10.5 1.1013 10.5 1.4988V10.4916H1.5C1.10218 10.4916 0.720644 10.6495 0.43934 10.9306C0.158035 11.2117 0 11.5929 0 11.9904C0 12.3879 0.158035 12.7692 0.43934 13.0503C0.720644 13.3313 1.10218 13.4892 1.5 13.4892H10.5V22.4821Z"
+            fill="#F7F7F7" />
+        </svg>
       </button>
       <div class="modal-container">
         <div class="modal-form">
           <h2 class="modal-title">NEW NOTE</h2>
-          <input type="text" class="input input-add" placeholder="Input your note...">
+          <input type="text" class="input input-add" placeholder="Input your note..." />
           <div class="modal-btns">
             <button type="button" class="modal-btn cancel">CANCEL</button>
             <button type="button" class="modal-btn apply">APPLY</button>
           </div>
         </div>
       </div>
-        <button type="button" class="undo-btn">
-          <div class="timer">
-            <svg class="timer-svg" width="32" height="32">
-              <circle
-                class="bg"
-                cx="16"
-                cy="16"
-                r="14"
-              />
-              <circle
-                class="progress"
-                cx="16"
-                cy="16"
-                r="14"
-              />
-            </svg>
-            <span class="undo-count"></span>
-          </div>
-          <span class="undo-text">UNDO</span>
-          <img src="img/undo.svg">
-        </button>
+      <button type="button" class="undo-btn">
+        <div class="timer">
+          <svg class="timer-svg" width="32" height="32">
+            <circle class="bg" cx="16" cy="16" r="14" />
+            <circle class="progress" cx="16" cy="16" r="14" />
+          </svg>
+          <span class="undo-count"></span>
+        </div>
+        <span class="undo-text">UNDO</span>
+        <img src="img/undo.svg" />
+      </button>
     </div>
-    <script src="main.js"></script>
+
+    <div class="progress-board-container">
+      <h2 class="progress-title">Ваш прогресс:</h2>
+      <div class="progress-wrapper">
+        <div class="progress-bar">
+          <div class="progress-bar-fill" id="progress"></div>
+        </div>
+      </div>
+
+      <div class="row">
+      </div>
+
+      <form class="form">
+        <h2 class="progress-title">Добавить технологию</h2>
+        <div class="form-control">
+          <label for="title">Название</label>
+          <input type="text" id="title" name="title" placeholder="Введите название технологии" />
+        </div>
+        <div class="form-control">
+          <label for="description">Описание</label>
+          <textarea id="description" name="description" placeholder="Введите описание технологии"></textarea>
+          <button type="submit" class="form-btn">Добавить</button>
+        </div>
+      </form>
+      <div class="form-modal">
+      </div>
+      <div class="form-modal-backdrop" id="backdrop"></div>
+    </div>
+    <script type="module" src="main.js"></script>
+    <script type="module" src="ProgressBoard.js"></script>
   </body>
 </html>
