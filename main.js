@@ -210,3 +210,28 @@ theme.addEventListener('click', () => {
   themeIcon.src = isDark ? 'img/moon.svg' : 'img/sun.svg'
   themeIcon.alt = isDark ? 'moon' : 'sun'
 })
+
+
+const tabs = document.querySelector('.tabs');
+
+tabs.addEventListener('click', (e) => {
+  const currentTab = e.target.closest('.tab');
+
+  if (!currentTab) return;
+
+  const dataTab = currentTab.dataset.tab;
+  const currentPanel = document.querySelector(
+    `.panel[data-tab="${dataTab}"]`
+  );
+
+  if (!currentPanel) return;
+
+  document.querySelector('.tab.active')
+    ?.classList.remove('active');
+
+  document.querySelector('.panel.active')
+    ?.classList.remove('active');
+
+  currentTab.classList.add('active');
+  currentPanel.classList.add('active');
+});
