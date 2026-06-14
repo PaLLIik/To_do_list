@@ -38,6 +38,7 @@ add.addEventListener('click', () => {
     isEditing: false,
   }
   tasks.push(task)
+  saveTasks()
   render(tasks)
   input.value = ''
 })
@@ -48,7 +49,9 @@ modalForm.addEventListener('click', e => {
 
 const list = document.querySelector('.list')
 const input = document.querySelector('.input-add')
-let tasks = []
+
+let tasks = getTasks()
+render(tasks)
 
 function render(arrTasks) {
   list.innerHTML = ''
@@ -154,6 +157,7 @@ function startDeleteTimer(taskId) {
 
   deleteTimeoutId = setTimeout(() => {
     tasks = tasks.filter(t => t.id !== taskId)
+    saveTasks()
     render(tasks)
     cancelPendingDelete()
   }, totalTime)
@@ -173,6 +177,7 @@ list.addEventListener('click', e => {
     const taskId = Number(e.target.closest('.task').dataset.id)
     const task = tasks.find(t => t.id === taskId)
     task.completed = !task.completed
+    saveTasks()
     render(tasks)
   }
 
@@ -180,6 +185,7 @@ list.addEventListener('click', e => {
     const taskId = Number(e.target.closest('.task').dataset.id)
     const task = tasks.find(t => t.id === taskId)
     task.isEditing = !task.isEditing
+    saveTasks()
     render(tasks)
     const redactionTask = document.querySelector(`[data-id="${taskId}"]`)
     const editInput = redactionTask.querySelector('.edit-input')
@@ -195,6 +201,7 @@ list.addEventListener('click', e => {
     const editInput = redactionTask.querySelector('.edit-input')
     task.text = editInput.value.trim()
     task.isEditing = !task.isEditing
+    saveTasks()
     render(tasks)
   }
 
@@ -202,6 +209,7 @@ list.addEventListener('click', e => {
     const taskId = Number(e.target.closest('.task').dataset.id)
     const task = tasks.find(t => t.id === taskId)
     task.isEditing = !task.isEditing
+    saveTasks()
     render(tasks)
   }
 })
@@ -268,3 +276,34 @@ theme.addEventListener('click', () => {
   themeIcon.src = isDark ? 'img/moon.svg' : 'img/sun.svg'
   themeIcon.alt = isDark ? 'moon' : 'sun'
 })
+
+const totalTasks = document.querySelector('.all-tasks p')
+const deleteAll = document.querySelector('.delete-all')
+
+totalTasks.innerHTML = `Total tasks: ${tasks.length}`
+
+deleteAll.addEventListener('click', () => {
+  cancelPendingDelete()
+  const temptTasks = []
+  render(temptTasks)
+
+  start = Date.now()
+  undoBtn.classList.add('open')
+
+  deleteTimeoutId = setTimeout(() => {
+    localStorage.setItem('dataTasks', JSON.stringify([]))
+    render(tasks)
+    cancelPendingDelete()
+  }, totalTime)
+
+  updateTimer()
+})
+
+function saveTasks() {
+  localStorage.setItem('dataTasks', JSON.stringify(tasks))
+}
+
+function getTasks() {
+  const dataTascks = localStorage.getItem('dataTasks')
+  return JSON.parse(dataTascks) || []
+}
