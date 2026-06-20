@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="forma.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -73,6 +74,59 @@
           <img src="img/undo.svg">
         </button>
     </div>
-    <script src="main.js"></script>
+
+    <div class="contact-form">
+      <h1>Contact Us</h1>
+  
+      <form>
+        <div class="row">
+          <div class="field">
+            <label>First Name <span>*</span></label>
+            <input type="text" name="firstName">
+          </div>
+  
+          <div class="field">
+            <label>Last Name <span>*</span></label>
+            <input type="text" name="lastName">
+          </div>
+        </div>
+  
+        <div class="field">
+          <label>Email Address <span>*</span></label>
+          <input type="email" name="email">
+        </div>
+  
+        <div class="field">
+          <label>Query Type <span>*</span></label>
+  
+          <div class="radio-group">
+            <label class="radio-card">
+              <input type="radio" name="queryType" value="1">
+              <span>General Enquiry</span>
+            </label>
+  
+            <label class="radio-card">
+              <input type="radio" name="queryType" value="2">
+              <span>Support Request</span>
+            </label>
+          </div>
+        </div>
+  
+        <div class="field">
+          <label>Message <span>*</span></label>
+          <textarea name="message"></textarea>
+        </div>
+  
+        <label class="checkbox">
+          <input type="checkbox" name="consent" required>
+          <span>I consent to being contacted by the team *</span>
+        </label>
+  
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+
+    <script src="main.js" type="module"></script>
+    <script src="forma.js" type="module"></script>
   </body>
 </html>
